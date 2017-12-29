@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="footcamModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="A_Id" />
+          </Key>
+          <Property Name="A_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="A_FieldId" Type="int" Nullable="false" />
+          <Property Name="A_City" Type="nvarchar" MaxLength="50" />
+          <Property Name="A_District" Type="nvarchar" MaxLength="50" />
+          <Property Name="A_Street" Type="nvarchar" MaxLength="50" />
+          <Property Name="A_Number" Type="int" />
+          <Property Name="A_ZipCode" Type="nvarchar" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="BookingOptions">
+          <Key>
+            <PropertyRef Name="BO_Id" />
+          </Key>
+          <Property Name="BO_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BO_IdField" Type="int" Nullable="false" />
+          <Property Name="BO_MonFrom" Type="time" Precision="0" />
+          <Property Name="BO_MonTo" Type="time" Precision="0" />
+          <Property Name="BO_TuesFrom" Type="time" Precision="0" />
+          <Property Name="BO_TuesTo" Type="time" Precision="0" />
+          <Property Name="BO_WedFrom" Type="time" Precision="0" />
+          <Property Name="BO_WedTo" Type="time" Precision="0" />
+          <Property Name="BO_ThursFrom" Type="time" Precision="0" />
+          <Property Name="BO_ThursTo" Type="time" Precision="0" />
+          <Property Name="BO_FriFrom" Type="time" Precision="0" />
+          <Property Name="BO_FriTo" Type="time" Precision="0" />
+          <Property Name="BO_SatFrom" Type="time" Precision="0" />
+          <Property Name="BO_SatTo" Type="time" Precision="0" />
+          <Property Name="BO_SunFrom" Type="time" Precision="0" />
+          <Property Name="BO_SunTo" Type="time" Precision="0" />
+          <Property Name="BO_MaxHourBook" Type="int" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="B_Id" />
+          </Key>
+          <Property Name="B_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="B_IdField" Type="int" Nullable="false" />
+          <Property Name="B_BookDTFrom" Type="datetime" />
+          <Property Name="B_BookDTTo" Type="datetime" />
+          <Property Name="B_PersonName" Type="nvarchar" MaxLength="50" />
+          <Property Name="B_PersonSurname" Type="nvarchar" MaxLength="50" />
+          <Property Name="B_ConfirmedByUser" Type="bit" />
+        </EntityType>
+        <EntityType Name="Fields">
+          <Key>
+            <PropertyRef Name="F_Id" />
+          </Key>
+          <Property Name="F_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="F_IdAddress" Type="int" />
+          <Property Name="F_Light" Type="bit" />
+          <Property Name="F_Rental" Type="bit" />
+          <Property Name="F_BookingPossibility" Type="bit" />
+          <Property Name="F_PhotoPath" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="OpenDaysHours">
+          <Key>
+            <PropertyRef Name="ODH_Id" />
+          </Key>
+          <Property Name="ODH_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ODH_IdField" Type="int" Nullable="false" />
+          <Property Name="ODH_MonFrom" Type="time" Precision="0" />
+          <Property Name="ODH_MonTo" Type="time" Precision="0" />
+          <Property Name="ODH_TuesFrom" Type="time" Precision="0" />
+          <Property Name="ODH_TuesTo" Type="time" Precision="0" />
+          <Property Name="ODH_WedFrom" Type="time" Precision="0" />
+          <Property Name="ODH_WedTo" Type="time" Precision="0" />
+          <Property Name="ODH_ThursFrom" Type="time" Precision="0" />
+          <Property Name="ODH_ThursTo" Type="time" Precision="0" />
+          <Property Name="ODH_FriFrom" Type="time" Precision="0" />
+          <Property Name="ODH_FriTo" Type="time" Precision="0" />
+          <Property Name="ODH_SatFrom" Type="time" Precision="0" />
+          <Property Name="ODH_SatTo" Type="time" Precision="0" />
+          <Property Name="ODH_SunFrom" Type="time" Precision="0" />
+          <Property Name="ODH_SunTo" Type="time" Precision="0" />
+        </EntityType>
+        <EntityContainer Name="footcamModelStoreContainer">
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingOptions" EntityType="Self.BookingOptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fields" EntityType="Self.Fields" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OpenDaysHours" EntityType="Self.OpenDaysHours" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="footcamModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="footcamEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="footcamModel.Address" />
+          <EntitySet Name="BookingOptions" EntityType="footcamModel.BookingOption" />
+          <EntitySet Name="Books" EntityType="footcamModel.Book" />
+          <EntitySet Name="Fields" EntityType="footcamModel.Field" />
+          <EntitySet Name="OpenDaysHours" EntityType="footcamModel.OpenDaysHour" />
+        </EntityContainer>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="A_Id" />
+          </Key>
+          <Property Name="A_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="A_FieldId" Type="Int32" Nullable="false" />
+          <Property Name="A_City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="A_District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="A_Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="A_Number" Type="Int32" />
+          <Property Name="A_ZipCode" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BookingOption">
+          <Key>
+            <PropertyRef Name="BO_Id" />
+          </Key>
+          <Property Name="BO_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BO_IdField" Type="Int32" Nullable="false" />
+          <Property Name="BO_MonFrom" Type="Time" Precision="0" />
+          <Property Name="BO_MonTo" Type="Time" Precision="0" />
+          <Property Name="BO_TuesFrom" Type="Time" Precision="0" />
+          <Property Name="BO_TuesTo" Type="Time" Precision="0" />
+          <Property Name="BO_WedFrom" Type="Time" Precision="0" />
+          <Property Name="BO_WedTo" Type="Time" Precision="0" />
+          <Property Name="BO_ThursFrom" Type="Time" Precision="0" />
+          <Property Name="BO_ThursTo" Type="Time" Precision="0" />
+          <Property Name="BO_FriFrom" Type="Time" Precision="0" />
+          <Property Name="BO_FriTo" Type="Time" Precision="0" />
+          <Property Name="BO_SatFrom" Type="Time" Precision="0" />
+          <Property Name="BO_SatTo" Type="Time" Precision="0" />
+          <Property Name="BO_SunFrom" Type="Time" Precision="0" />
+          <Property Name="BO_SunTo" Type="Time" Precision="0" />
+          <Property Name="BO_MaxHourBook" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="B_Id" />
+          </Key>
+          <Property Name="B_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="B_IdField" Type="Int32" Nullable="false" />
+          <Property Name="B_BookDTFrom" Type="DateTime" Precision="3" />
+          <Property Name="B_BookDTTo" Type="DateTime" Precision="3" />
+          <Property Name="B_PersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="B_PersonSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="B_ConfirmedByUser" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Field">
+          <Key>
+            <PropertyRef Name="F_Id" />
+          </Key>
+          <Property Name="F_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F_IdAddress" Type="Int32" />
+          <Property Name="F_Light" Type="Boolean" />
+          <Property Name="F_Rental" Type="Boolean" />
+          <Property Name="F_BookingPossibility" Type="Boolean" />
+          <Property Name="F_PhotoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OpenDaysHour">
+          <Key>
+            <PropertyRef Name="ODH_Id" />
+          </Key>
+          <Property Name="ODH_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ODH_IdField" Type="Int32" Nullable="false" />
+          <Property Name="ODH_MonFrom" Type="Time" Precision="0" />
+          <Property Name="ODH_MonTo" Type="Time" Precision="0" />
+          <Property Name="ODH_TuesFrom" Type="Time" Precision="0" />
+          <Property Name="ODH_TuesTo" Type="Time" Precision="0" />
+          <Property Name="ODH_WedFrom" Type="Time" Precision="0" />
+          <Property Name="ODH_WedTo" Type="Time" Precision="0" />
+          <Property Name="ODH_ThursFrom" Type="Time" Precision="0" />
+          <Property Name="ODH_ThursTo" Type="Time" Precision="0" />
+          <Property Name="ODH_FriFrom" Type="Time" Precision="0" />
+          <Property Name="ODH_FriTo" Type="Time" Precision="0" />
+          <Property Name="ODH_SatFrom" Type="Time" Precision="0" />
+          <Property Name="ODH_SatTo" Type="Time" Precision="0" />
+          <Property Name="ODH_SunFrom" Type="Time" Precision="0" />
+          <Property Name="ODH_SunTo" Type="Time" Precision="0" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="footcamModelStoreContainer" CdmEntityContainer="footcamEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="footcamModel.Address">
+              <MappingFragment StoreEntitySet="Addresses">
+                <ScalarProperty Name="A_ZipCode" ColumnName="A_ZipCode" />
+                <ScalarProperty Name="A_Number" ColumnName="A_Number" />
+                <ScalarProperty Name="A_Street" ColumnName="A_Street" />
+                <ScalarProperty Name="A_District" ColumnName="A_District" />
+                <ScalarProperty Name="A_City" ColumnName="A_City" />
+                <ScalarProperty Name="A_FieldId" ColumnName="A_FieldId" />
+                <ScalarProperty Name="A_Id" ColumnName="A_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingOptions">
+            <EntityTypeMapping TypeName="footcamModel.BookingOption">
+              <MappingFragment StoreEntitySet="BookingOptions">
+                <ScalarProperty Name="BO_MaxHourBook" ColumnName="BO_MaxHourBook" />
+                <ScalarProperty Name="BO_SunTo" ColumnName="BO_SunTo" />
+                <ScalarProperty Name="BO_SunFrom" ColumnName="BO_SunFrom" />
+                <ScalarProperty Name="BO_SatTo" ColumnName="BO_SatTo" />
+                <ScalarProperty Name="BO_SatFrom" ColumnName="BO_SatFrom" />
+                <ScalarProperty Name="BO_FriTo" ColumnName="BO_FriTo" />
+                <ScalarProperty Name="BO_FriFrom" ColumnName="BO_FriFrom" />
+                <ScalarProperty Name="BO_ThursTo" ColumnName="BO_ThursTo" />
+                <ScalarProperty Name="BO_ThursFrom" ColumnName="BO_ThursFrom" />
+                <ScalarProperty Name="BO_WedTo" ColumnName="BO_WedTo" />
+                <ScalarProperty Name="BO_WedFrom" ColumnName="BO_WedFrom" />
+                <ScalarProperty Name="BO_TuesTo" ColumnName="BO_TuesTo" />
+                <ScalarProperty Name="BO_TuesFrom" ColumnName="BO_TuesFrom" />
+                <ScalarProperty Name="BO_MonTo" ColumnName="BO_MonTo" />
+                <ScalarProperty Name="BO_MonFrom" ColumnName="BO_MonFrom" />
+                <ScalarProperty Name="BO_IdField" ColumnName="BO_IdField" />
+                <ScalarProperty Name="BO_Id" ColumnName="BO_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="footcamModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="B_ConfirmedByUser" ColumnName="B_ConfirmedByUser" />
+                <ScalarProperty Name="B_PersonSurname" ColumnName="B_PersonSurname" />
+                <ScalarProperty Name="B_PersonName" ColumnName="B_PersonName" />
+                <ScalarProperty Name="B_BookDTTo" ColumnName="B_BookDTTo" />
+                <ScalarProperty Name="B_BookDTFrom" ColumnName="B_BookDTFrom" />
+                <ScalarProperty Name="B_IdField" ColumnName="B_IdField" />
+                <ScalarProperty Name="B_Id" ColumnName="B_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fields">
+            <EntityTypeMapping TypeName="footcamModel.Field">
+              <MappingFragment StoreEntitySet="Fields">
+                <ScalarProperty Name="F_PhotoPath" ColumnName="F_PhotoPath" />
+                <ScalarProperty Name="F_BookingPossibility" ColumnName="F_BookingPossibility" />
+                <ScalarProperty Name="F_Rental" ColumnName="F_Rental" />
+                <ScalarProperty Name="F_Light" ColumnName="F_Light" />
+                <ScalarProperty Name="F_IdAddress" ColumnName="F_IdAddress" />
+                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+                <ScalarProperty Name="F_Id" ColumnName="F_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OpenDaysHours">
+            <EntityTypeMapping TypeName="footcamModel.OpenDaysHour">
+              <MappingFragment StoreEntitySet="OpenDaysHours">
+                <ScalarProperty Name="ODH_SunTo" ColumnName="ODH_SunTo" />
+                <ScalarProperty Name="ODH_SunFrom" ColumnName="ODH_SunFrom" />
+                <ScalarProperty Name="ODH_SatTo" ColumnName="ODH_SatTo" />
+                <ScalarProperty Name="ODH_SatFrom" ColumnName="ODH_SatFrom" />
+                <ScalarProperty Name="ODH_FriTo" ColumnName="ODH_FriTo" />
+                <ScalarProperty Name="ODH_FriFrom" ColumnName="ODH_FriFrom" />
+                <ScalarProperty Name="ODH_ThursTo" ColumnName="ODH_ThursTo" />
+                <ScalarProperty Name="ODH_ThursFrom" ColumnName="ODH_ThursFrom" />
+                <ScalarProperty Name="ODH_WedTo" ColumnName="ODH_WedTo" />
+                <ScalarProperty Name="ODH_WedFrom" ColumnName="ODH_WedFrom" />
+                <ScalarProperty Name="ODH_TuesTo" ColumnName="ODH_TuesTo" />
+                <ScalarProperty Name="ODH_TuesFrom" ColumnName="ODH_TuesFrom" />
+                <ScalarProperty Name="ODH_MonTo" ColumnName="ODH_MonTo" />
+                <ScalarProperty Name="ODH_MonFrom" ColumnName="ODH_MonFrom" />
+                <ScalarProperty Name="ODH_IdField" ColumnName="ODH_IdField" />
+                <ScalarProperty Name="ODH_Id" ColumnName="ODH_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

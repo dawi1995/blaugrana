@@ -1,0 +1,63 @@
+﻿
+@Styles.Render("~/Styles/Fields/FieldExtension.css")
+<div class="fieldExtension-content">
+    <div class="fieldExtension-panel">
+        <div class="fieldExtension-panel-title">@Model.F_Name</div>
+        <div class="panel" id="panel-address">
+            <div class="panel-title" id="address-title">Adres</div>
+            <div class="panel-content" id="address-content">
+                @Model.A_Street @Model.A_Number<br/>
+                @Model.A_District<br/>
+                @Model.A_ZipCode @Model.A_City
+            </div>
+        </div>
+        <div class="panel" id="panel-openHours">
+            <div class="panel-title" id="openHours-title">Godziny otwarcia</div>
+            <div class="panel-content" id="openHours-content">
+                <div class="panel-content-titles" id="penHours-content-titles">
+                    Poniedziałek:<br/>
+                    Wtorek:<br/>
+                    Środa:<br/>
+                    Czwartek:<br/>
+                    Piątek:<br/>
+                    Sobota:<br/>
+                    Niedziela:<br/>
+                </div>
+                <div class="panel-content-info" id="openHours-content-info">
+                    @Model.FI_Mon<br />
+                    @Model.FI_Tues<br />
+                    @Model.FI_Wed<br />
+                    @Model.FI_Thurs<br />
+                    @Model.FI_Fri<br />
+                    @Model.FI_Sat<br />
+                    @Model.FI_Sun<br />
+                </div>
+            </div>
+        </div>
+        <div class="panel" id="panel-otherInformation">
+            <div class="panel-title" id="openHours-title">Pozostałe informacje</div>
+            <div class="panel-content" id="openHours-content">
+                <div class="panel-content-titles" id="openHours-content-titles">
+                    Oświetlenie:<br />
+                    Wypożyczalnia:<br />
+                    Rezerwacja:<br />
+                </div>
+                <div class="panel-content-info" id="openHours-content-info">
+                    @Model.F_Light<br />
+                    @Model.F_Rental<br />
+                    @Model.F_BookingPossibility<br />
+                </div>
+            </div>
+        </div>
+        <div class="panel" id="panel-photoLive">
+            <div class="panel-title" id="photoLive-title">Zdjęcia na żywo</div>
+            <div class="panel-content" id="photoLive-content">
+                <img src=@Model.F_PhotoPath alt="Zdjecie" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
