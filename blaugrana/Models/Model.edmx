@@ -50,6 +50,7 @@
           <Property Name="B_PersonName" Type="nvarchar" MaxLength="50" />
           <Property Name="B_PersonSurname" Type="nvarchar" MaxLength="50" />
           <Property Name="B_ConfirmedByUser" Type="bit" />
+          <Property Name="B_InsertDT" Type="datetime" />
         </EntityType>
         <EntityType Name="Fields">
           <Key>
@@ -147,6 +148,7 @@
           <Property Name="B_PersonName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="B_PersonSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="B_ConfirmedByUser" Type="Boolean" />
+          <Property Name="B_InsertDT" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Field">
           <Key>
@@ -226,6 +228,7 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="footcamModel.Book">
               <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="B_InsertDT" ColumnName="B_InsertDT" />
                 <ScalarProperty Name="B_ConfirmedByUser" ColumnName="B_ConfirmedByUser" />
                 <ScalarProperty Name="B_PersonSurname" ColumnName="B_PersonSurname" />
                 <ScalarProperty Name="B_PersonName" ColumnName="B_PersonName" />

@@ -1,0 +1,19 @@
+﻿@Styles.Render("~/Styles/Books/CreateInformation.css")
+@{
+    if (@Page.IfGoodValidation == true)
+    {
+        <div class="panel-content-information-text-good">
+            <p>
+                @Page.Text
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="panel-content-information-text-bad">
+            <p>
+                @Page.Text
+            </p>
+        </div>
+    }
+}

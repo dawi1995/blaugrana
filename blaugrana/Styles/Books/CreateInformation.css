@@ -1,0 +1,24 @@
+﻿.panel-content-information-text-good {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    height: 70%;
+    background-color: green;
+    border-radius: 30px;
+}
+.panel-content-information-text-bad {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    height: 70%;
+    background-color: red;
+    border-radius: 30px;
+}
+.panel-content-information-text-bad p{
+    margin-top:0px;
+}
+.panel-content-information-text-good p{
+    margin-top:0px;
+}

@@ -21,5 +21,6 @@ namespace blaugrana.Models
         public string B_PersonName { get; set; }
         public string B_PersonSurname { get; set; }
         public Nullable<bool> B_ConfirmedByUser { get; set; }
+        public Nullable<System.DateTime> B_InsertDT { get; set; }
     }
 }

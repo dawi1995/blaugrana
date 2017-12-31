@@ -1,0 +1,130 @@
+﻿@Styles.Render("~/Styles/Books/FieldBooksExtension.css")
+
+
+
+
+<div class="fieldBooksExtension-content">
+    <div class="fieldBooksExtension-panel">
+        <div class="fieldBooksExtension-panel-title">Ledóchowska</div>
+        <div class="panel" id="panel-possibilityBooksHours">
+            <div class="panel-title" id="possibilityBooksHours-title">Dostępne godziny rezerwacji</div>
+            <div class="panel-content" id="possibilityBooksHours-content">
+                <div class="panel-content-titles" id="possibilityBooksHours-content-titles">
+                    Poniedziałek:<br />
+                    Wtorek:<br />
+                    Środa:<br />
+                    Czwartek:<br />
+                    Piątek:<br />
+                    Sobota:<br />
+                    Niedziela:<br />
+                </div>
+                <div class="panel-content-info" id="possibilityBooksHours-content-info">
+                    @Model.FBI_Mon<br />
+                    @Model.FBI_Tues<br />
+                    @Model.FBI_Wed<br />
+                    @Model.FBI_Thurs<br />
+                    @Model.FBI_Fri<br />
+                    @Model.FBI_Sat<br />
+                    @Model.FBI_Sun<br />
+                </div>
+            </div>
+        </div>
+
+        <div class="panel" id="panel-books">
+           <div class="panel-title" id="books-title">Rezerwacje</div>
+           <div class="panel-content" id="books-content">
+               @{
+                   if (Model.FBI_Books is null)
+                   {
+                       <p>Brak rezerwacji</p>
+                   }
+                   else
+                   {
+                       bool IfShow = false;
+                       for (int i = 0; i < Model.FBI_Books.Count; i++)
+                       {
+                           if (@Model.FBI_Books[i].B_BookDTFrom >= DateTime.Now && (@Model.FBI_Books[i].B_ConfirmedByUser == true || (TimeSpan)(DateTime.Now - @Model.FBI_Books[i].B_InsertDT) <= new TimeSpan(0, 5, 0)))
+                           {
+                            IfShow = true;
+                            <p>
+                                <b>@Model.FBI_Books[i].B_BookDTFrom.ToString("yyyy-MM-dd") @Model.FBI_Books[i].BI_Time </b> <br />
+                                @Model.FBI_Books[i].B_PersonName @Model.FBI_Books[i].B_PersonSurname<br />
+                                @Model.FBI_Books[i].BI_Confirmed<br />
+                                
+                                
+                            </p>
+                           }
+
+                       }
+                       if (IfShow == false)
+                       {
+                        <p>Brak rezerwacji</p>
+                       }
+                   }
+
+            }
+
+           </div>
+        </div>
+
+        <div class="panel" id="panel-createBook">
+            <div class="panel-title" id="createBook-title">Dokonaj rezerwacji</div>
+            <div class="panel-content" id="createBook-content">
+                <div class="panel-content-form">
+
+                    @using (Html.BeginForm("FieldBooksExtension", "Books", new { needValidate = true }, FormMethod.Post))
+                     {
+                        <div class=" panel-panel">
+                            @Html.TextBox("dateTime", null, new { @class = "textBox", placeholder = "2017-12-31 15:00" })
+                            <p>Podaj datę i godzinę, którą chcesz zarezerwować</p>
+                        </div>
+                        <div class=" panel-panel">
+                            @Html.TextBox("longBook", null, new { @class = "textBox", placeholder = "1" })
+                            <p>Podaj liczbę godzin na jaką chcesz dokonać rezerwacji</p>
+                        </div>
+                        <div class=" panel-panel">
+                            @Html.TextBox("email", null, new { @class = "textBox", placeholder = "email@domena.pl" })
+                            <p>Podaj swój adres email, na który przyjdzie link potwierdzający</p>
+                        </div>
+                        <div class=" panel-panel">
+                            @Html.TextBox("name", null, new { @class = "textBox", placeholder = "Jan" })
+                            <p>Podaj swoje imię</p>
+                        </div>
+                        <div class=" panel-panel">
+                            @Html.TextBox("surname", null, new { @class = "textBox", placeholder = "Kowalski" })
+                            <p>Podaj swoje nazwisko</p>
+                        </div>
+                        <button class="buttonCreateBook" type="submit">Dokonaj rezerwacji</button>
+                     }
+
+
+                </div>
+
+                <div class="panel-content-information">
+                    @{
+                        if (@Model.FBI_IfGoodValidation != null)
+                        {
+                            @RenderPage("../Books/CreateInformation.cshtml", new { IfGoodValidation = @Model.FBI_IfGoodValidation, Text = @Model.FBI_TextValidation })
+                        }
+                    }
+                    
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $function () {
+        $('.buttonCreateBook').click(function () {
+            var dateTime = document.getElementById("dateTime").value;
+            this.href = this.href.replace("xxx", dateTime);
+        });
+    });
+
+</script>
+@*<input type="text" name="IP" id="IP" value="" />*@
+@*@Html.ActionLink(@Resource.ButtonTitleAdd, "Add", "Configure", new { ipValue = "xxx", TypeId = "1" }, new { @class = "link" })*@
+

@@ -151,6 +151,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FieldsController.cs" />
+    <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -161,12 +162,14 @@
     <Compile Include="Models\Book.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BookInformation.cs" />
     <Compile Include="Models\BookingOption.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Field.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FieldBooksInformation.cs" />
     <Compile Include="Models\FieldInformation.cs" />
     <Compile Include="Models\Model.Context.cs">
       <AutoGen>True</AutoGen>
@@ -243,6 +246,9 @@
     <Content Include="Resources\Images\header.jpg" />
     <Content Include="Resources\Images\header2.jpg" />
     <Content Include="Resources\Images\information.png" />
+    <Content Include="Styles\Books\CreateInformation.css" />
+    <Content Include="Styles\Books\FieldBooksExtension.css" />
+    <Content Include="Styles\Books\Fields.css" />
     <Content Include="Styles\Fields\FieldExtension.css" />
     <Content Include="Styles\Fields\Fields.css" />
     <Content Include="Styles\Index\Index.css" />
@@ -263,6 +269,9 @@
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Fields\Fields.cshtml" />
     <Content Include="Views\Fields\FieldExtension.cshtml" />
+    <Content Include="Views\Books\Fields.cshtml" />
+    <Content Include="Views\Books\FieldBooksExtension.cshtml" />
+    <Content Include="Views\Books\CreateInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

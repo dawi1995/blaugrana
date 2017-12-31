@@ -1,0 +1,67 @@
+﻿
+.books-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.books-content a{
+    text-decoration: none;
+}
+
+.field-panel {
+    background-color: #252C21;
+    width: 97%;
+    height: 100px;
+    margin-top: 20px;
+    transition: 0.7s;
+    display: flex;
+    color: #252C21;
+    font-family: Oswald,sans-serif;
+    font-size: 50px;
+    line-height: 100px;
+}
+
+.field-panel:hover {
+    background-color: #4BCC04;
+    cursor: pointer;
+}
+
+.panel-image {
+    height: 100%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.panel-description {
+    height: 100%;
+    width: 90%;
+    background-color: #F5F5F5;
+}
+
+.panel-description-text{
+    margin-left: 10px;
+}
+
+@media (max-width: 400px) {
+    .field-panel{
+        font-size: 30px;
+    }
+}
+@media (max-width: 300px) {
+    .field-panel {
+        font-size: 20px;
+    }
+}
+@media (max-width: 190px) {
+    .field-panel {
+        font-size: 15px;
+        height:50px;
+        line-height:50px;
+    }
+}
