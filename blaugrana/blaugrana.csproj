@@ -246,6 +246,7 @@
     <Content Include="Resources\Images\header.jpg" />
     <Content Include="Resources\Images\header2.jpg" />
     <Content Include="Resources\Images\information.png" />
+    <Content Include="Styles\Books\ConfirmBooking.css" />
     <Content Include="Styles\Books\CreateInformation.css" />
     <Content Include="Styles\Books\FieldBooksExtension.css" />
     <Content Include="Styles\Books\Fields.css" />
@@ -272,6 +273,7 @@
     <Content Include="Views\Books\Fields.cshtml" />
     <Content Include="Views\Books\FieldBooksExtension.cshtml" />
     <Content Include="Views\Books\CreateInformation.cshtml" />
+    <Content Include="Views\Books\ConfirmBooking.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

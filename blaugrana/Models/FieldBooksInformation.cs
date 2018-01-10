@@ -36,6 +36,7 @@ namespace blaugrana.Models
         //Other Informations
         public bool? FBI_IfGoodValidation { get; set; }
         public string FBI_TextValidation { get; set; }
+        public bool FBI_NeedValidate { get; set; }
 
         public FieldBooksInformation()
         {
@@ -73,7 +74,7 @@ namespace blaugrana.Models
 
 
             if (!bookingOption.BO_MonFrom.HasValue || !bookingOption.BO_MonTo.HasValue)
-                FBI_Mon = "nieczynne";
+                FBI_Mon = "brak możliwości rezerwacji";
             else
             {
                 string MonHourFrom = bookingOption.BO_MonFrom.Value.Hours.ToString().Length < 2 ? "0" + bookingOption.BO_MonFrom.Value.Hours.ToString() : bookingOption.BO_MonFrom.Value.Hours.ToString();
@@ -86,7 +87,7 @@ namespace blaugrana.Models
 
 
             if (!bookingOption.BO_TuesFrom.HasValue || !bookingOption.BO_TuesTo.HasValue)
-                FBI_Tues = "nieczynne";
+                FBI_Tues = "brak możliwości rezerwacji";
             else
             {
                 string TuesHourFrom = bookingOption.BO_TuesFrom.Value.Hours.ToString().Length < 2 ? "0" + bookingOption.BO_TuesFrom.Value.Hours.ToString() : bookingOption.BO_TuesFrom.Value.Hours.ToString();
@@ -98,7 +99,7 @@ namespace blaugrana.Models
             }
 
             if (!bookingOption.BO_WedFrom.HasValue || !bookingOption.BO_WedTo.HasValue)
-                FBI_Wed = "nieczynne";
+                FBI_Wed = "brak możliwości rezerwacji";
             else
             {
                 string WedHourFrom = bookingOption.BO_WedFrom.Value.Hours.ToString().Length < 2 ? "0" + bookingOption.BO_WedFrom.Value.Hours.ToString() : bookingOption.BO_WedFrom.Value.Hours.ToString();
@@ -110,7 +111,7 @@ namespace blaugrana.Models
             }
 
             if (!bookingOption.BO_ThursFrom.HasValue || !bookingOption.BO_ThursTo.HasValue)
-                FBI_Thurs = "nieczynne";
+                FBI_Thurs = "brak możliwości rezerwacji";
             else
             {
                 string ThursHourFrom = bookingOption.BO_ThursFrom.Value.Hours.ToString().Length < 2 ? "0" + bookingOption.BO_ThursFrom.Value.Hours.ToString() : bookingOption.BO_ThursFrom.Value.Hours.ToString();
@@ -123,7 +124,7 @@ namespace blaugrana.Models
 
 
             if (!bookingOption.BO_FriFrom.HasValue || !bookingOption.BO_FriTo.HasValue)
-                FBI_Fri = "nieczynne";
+                FBI_Fri = "brak możliwości rezerwacji";
             else
             {
                 string FrisHourFrom = bookingOption.BO_FriFrom.Value.Hours.ToString().Length < 2 ? "0" + bookingOption.BO_FriFrom.Value.Hours.ToString() : bookingOption.BO_FriFrom.Value.Hours.ToString();
@@ -136,7 +137,7 @@ namespace blaugrana.Models
 
 
             if (!bookingOption.BO_SatFrom.HasValue || !bookingOption.BO_SatTo.HasValue)
-                FBI_Sat = "nieczynne";
+                FBI_Sat = "brak możliwości rezerwacji";
             else
             {
                 string SatHourFrom = bookingOption.BO_SatFrom.Value.Hours.ToString().Length < 2 ? "0" + bookingOption.BO_SatFrom.Value.Hours.ToString() : bookingOption.BO_SatFrom.Value.Hours.ToString();
@@ -149,7 +150,7 @@ namespace blaugrana.Models
 
 
             if (!bookingOption.BO_SunFrom.HasValue || !bookingOption.BO_SunTo.HasValue)
-                FBI_Sun = "nieczynne";
+                FBI_Sun = "brak możliwości rezerwacji";
             else
             {
                 string SunHourFrom = bookingOption.BO_SunFrom.Value.Hours.ToString().Length < 2 ? "0" + bookingOption.BO_SunFrom.Value.Hours.ToString() : bookingOption.BO_SunFrom.Value.Hours.ToString();

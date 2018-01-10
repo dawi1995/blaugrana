@@ -1,0 +1,33 @@
+﻿.confirm-content {
+    height: 500px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #252C21;
+    font-family: Oswald,sans-serif;
+    font-size: 40px;
+    background-color:#F5F5F5;
+    text-align: center;
+}
+@media (max-width: 550px) {
+
+    .confirm-content {
+        height: 300px;
+        font-size: 30px;
+    }
+}
+@media (max-width: 400px) {
+
+    .confirm-content {
+        height: 250px;
+        font-size: 25px;
+    }
+}
+@media (max-width: 400px) {
+
+    .confirm-content {
+        height: 250px;
+        font-size: 15px;
+    }
+}

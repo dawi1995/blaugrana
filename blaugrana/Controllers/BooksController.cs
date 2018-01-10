@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
+using System.Net.Mail;
 
 namespace blaugrana.Controllers
 {
@@ -30,7 +32,10 @@ namespace blaugrana.Controllers
                 
                 FieldBooksInformation fieldBooksInformation = GetFieldBooksInformation(id);
                 fieldBooksInformation = Validation(fieldBooksInformation, dateTime, longBook, email, name, surname);
-                //w walidacji dodac tekst do walidacji   fieldBooksInformationToValidate.FBI_TextValidation
+                if (fieldBooksInformation.FBI_IfGoodValidation == true)
+                {
+                    GenerateBook((int)id, dateTime, longBook, email,name,surname);
+                }
                 return View(fieldBooksInformation);
             }
             else
@@ -53,7 +58,7 @@ namespace blaugrana.Controllers
                 field = db.Fields.Where(f => f.F_Id == id).ToList().FirstOrDefault();
                 bookingOption = db.BookingOptions.Where(bo => bo.BO_IdField == id).ToList().FirstOrDefault();
                 listOfBooks = db.Books.Where(b => b.B_IdField == id).ToList();
-                if (listOfBooks.Count < 1)
+                if (field is null)
                 {
                     fieldBooksInformation = new FieldBooksInformation();
                 }
@@ -209,9 +214,17 @@ namespace blaugrana.Controllers
                         }
                         break;
                 }
+                if (dateTimeStart < DateTime.Now)
+                {
+                    fieldBooksInformationToValidate.FBI_IfGoodValidation = false;
+                    fieldBooksInformationToValidate.FBI_TextValidation = "Nie możesz dokonać rezerwacji na wcześniejszy termin niż dziś";
+                    return fieldBooksInformationToValidate;
+                }
                 for (int i = 0; i < fieldBooksInformationToValidate.FBI_Books.Count; i++)
                 {
-                    if ((dateTimeStart >= fieldBooksInformationToValidate.FBI_Books[i].B_BookDTFrom && dateTimeStart <= fieldBooksInformationToValidate.FBI_Books[i].B_BookDTTo && ((bool)fieldBooksInformationToValidate.FBI_Books[i].B_ConfirmedByUser || (TimeSpan)(DateTime.Now - fieldBooksInformationToValidate.FBI_Books[i].B_InsertDT) < new TimeSpan(0, 5, 0)) || ((dateTimeStart.AddHours(longBooking) >= fieldBooksInformationToValidate.FBI_Books[i].B_BookDTFrom && dateTimeStart.AddHours(longBooking) <= fieldBooksInformationToValidate.FBI_Books[i].B_BookDTTo)) && ((bool)fieldBooksInformationToValidate.FBI_Books[i].B_ConfirmedByUser || (TimeSpan)(DateTime.Now - fieldBooksInformationToValidate.FBI_Books[i].B_InsertDT) < new TimeSpan(0, 5, 0))))
+                    if ((dateTimeStart >= fieldBooksInformationToValidate.FBI_Books[i].B_BookDTFrom && dateTimeStart <= fieldBooksInformationToValidate.FBI_Books[i].B_BookDTTo && ((bool)fieldBooksInformationToValidate.FBI_Books[i].B_ConfirmedByUser || (TimeSpan)(DateTime.Now - fieldBooksInformationToValidate.FBI_Books[i].B_InsertDT) < new TimeSpan(0, 5, 0)) 
+                        || ((dateTimeStart.AddHours(longBooking) >= fieldBooksInformationToValidate.FBI_Books[i].B_BookDTFrom && dateTimeStart.AddHours(longBooking) <= fieldBooksInformationToValidate.FBI_Books[i].B_BookDTTo)) && ((bool)fieldBooksInformationToValidate.FBI_Books[i].B_ConfirmedByUser || (TimeSpan)(DateTime.Now - fieldBooksInformationToValidate.FBI_Books[i].B_InsertDT) < new TimeSpan(0, 5, 0)))
+                        || (dateTimeStart < fieldBooksInformationToValidate.FBI_Books[i].B_BookDTFrom && dateTimeStart.AddHours(longBooking)> fieldBooksInformationToValidate.FBI_Books[i].B_BookDTTo))
                     {
                         fieldBooksInformationToValidate.FBI_IfGoodValidation = false;
                         fieldBooksInformationToValidate.FBI_TextValidation = "Ktoś inny ma rezerwację w tym czasie";
@@ -220,9 +233,9 @@ namespace blaugrana.Controllers
                     else
                     {
                         fieldBooksInformationToValidate.FBI_IfGoodValidation = true;
-                        fieldBooksInformationToValidate.FBI_TextValidation = "Wszystko Okej";
                     }
                 }
+
             }
             catch (Exception)
             {
@@ -231,7 +244,7 @@ namespace blaugrana.Controllers
                 return fieldBooksInformationToValidate;
             }
 
-            return fieldBooksInformationToValidate;
+
             #endregion
             #region EmailValidate
             if(!email.Contains('@'))
@@ -244,15 +257,99 @@ namespace blaugrana.Controllers
             {
                 fieldBooksInformationToValidate.FBI_IfGoodValidation = true;
             }
+
             #endregion
+            fieldBooksInformationToValidate.FBI_TextValidation = "Na Twój adres e-mail został wysłany link potwierdzający. Masz 5 minut na potwierdzenie rezerwacji.";
+            return fieldBooksInformationToValidate;
+        }
+        
+        public ActionResult ConfirmBooking(string guid)
+        {
+
+            using (var db = new footcamEntities())
+            {
+                try
+                {
+                    Book bookToConfirm = db.Books.Where(b => b.B_GUIDToConfirm == guid).ToList().FirstOrDefault();
+                    if ((TimeSpan)(DateTime.Now-bookToConfirm.B_InsertDT) > new TimeSpan(0,5,0))
+                    {
+                        ViewBag.Message = "Minęło ponad 5 minut od Twojej rezerwacji. Nie zostanie ona zatwierdzona.";
+                    }
+                    else
+                    {
+                        bookToConfirm.B_ConfirmedByUser = true;
+                        db.Entry(bookToConfirm).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                        ViewBag.Message = "Rezerwacja została potwierdzona, teraz możesz zobaczyć ją na liście rezerwacji.";
+                    }
+
+                }
+                catch
+                {
+                    ViewBag.Message = "Wystapił nieoczekiwany błąd.";
+                }
+
+            }
+            return View();
+        }
+        public void GenerateBook(int idField, string dateTimeStart, string longBook, string email, string name, string surname)
+        {
+            string guid = Guid.NewGuid().ToString();
+
+            Book newBook = new Book();
+            newBook.B_PersonName = name;
+            newBook.B_PersonSurname = surname;
+            newBook.B_IdField = idField;
+            newBook.B_InsertDT = DateTime.Now;
+            newBook.B_BookDTFrom = Convert.ToDateTime(dateTimeStart);
+            newBook.B_BookDTTo = Convert.ToDateTime(dateTimeStart).AddHours(Convert.ToDouble(longBook));
+            newBook.B_ConfirmedByUser = false;
+            newBook.B_GUIDToConfirm = guid;
+
+
+            using (var db = new footcamEntities())
+            {
+                db.Books.Add(newBook);
+                db.SaveChanges();
+            }
+
+            SendEmail(email, name, guid);
         }
 
-        public bool Validate(int a)
+        public void SendEmail(string email, string name, string guid)
         {
-            if (a == 1)
-                return true;
-            else
-                return false;
+            string content = guid;
+
+            UrlHelper u = new UrlHelper(this.ControllerContext.RequestContext);
+            string url = u.Action("ConfirmBooking", "BooksController", null);
+
+            var fromAddress = new MailAddress("dawidsonb95@gmail.com", "Dawid");
+            var toAddress = new MailAddress(email, name);
+            const string fromPassword = "WolaChojnata109";
+            const string subject = "Potwierdzenie rezerwacji";
+
+            string url2 = HtmlHelper.GenerateLink(this.ControllerContext.RequestContext, System.Web.Routing.RouteTable.Routes, "My link", "Default", "ConfirmBooking", "BooksController", null, null);
+            string body = content + url;
+            body = string.Format("Dziękujemy za złożenie rezerwacji, kliknij w poniższy link aby ją potwierdzić \n{0}", Url.Action("ConfirmBooking", "Books", new { guid = guid }, Request.Url.Scheme));
+
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body
+            })
+            {
+                smtp.Send(message);
+            }
         }
     }
 }

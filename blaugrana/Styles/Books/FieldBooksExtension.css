@@ -181,6 +181,22 @@
     .panel-content p {
         text-align: center;
     }
+    #createBook-content{
+        flex-direction: column;
+        align-items:center;
+    }
+    .panel-content-form form{
+        display:flex;
+        justify-content: center;
+        flex-direction:column;
+        align-items:center;
+    }
+    .buttonCreateBook {
+        width: 100%;
+    }
+    .panel-content-form {
+        width: 80%;
+    }
 }
 
 @media (max-width: 510px) {
@@ -196,6 +212,7 @@
     .panel-content {
         font-size: 15px;
     }
+
 }
 
 @media (max-width: 290px) {
@@ -212,6 +229,9 @@
 
     .panel-content {
         font-size: 10px;
+    }
+    .panel-content-form {
+        width: 95%;
     }
 }
 

@@ -4,7 +4,7 @@
     justify-content: center;
     width: 85%;
     height: 70%;
-    background-color: green;
+    background-color: rgba(0,255,0,0.3);
     border-radius: 30px;
 }
 .panel-content-information-text-bad {
@@ -13,12 +13,45 @@
     justify-content: center;
     width: 85%;
     height: 70%;
-    background-color: red;
+    background-color: rgba(255,0,0,0.3);
     border-radius: 30px;
 }
 .panel-content-information-text-bad p{
     margin-top:0px;
+    text-align:center;
 }
 .panel-content-information-text-good p{
     margin-top:0px;
+    text-align:center;
+}
+
+@media (max-width: 700px) {
+    .panel-content-information-text-good {
+        width:100%;
+        margin-top: 15px;
+        height: 200px;
+        
+    }
+
+    .panel-content-information-text-bad {
+        width: 100%;
+        margin-top: 15px;
+        height: 200px;
+    }
+    .panel-content-information{
+        width: 80%;
+    }
+}
+@media (max-width: 290px) {
+
+    .panel-content-information {
+        width: 95%;
+    }
+    .panel-content-information-text-good {
+        height: 100px;
+    }
+
+    .panel-content-information-text-bad {
+        height: 100px;
+    }
 }
